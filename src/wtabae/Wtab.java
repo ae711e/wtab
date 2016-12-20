@@ -8,28 +8,24 @@ public class Wtab {
 		// TODO Auto-generated method stub
 		//
 		try {
-		    // str=WordParser.parsed("c:/tmp/a97.doc");
-		    // str=WordParser.parsex("c:/tmp/_rev/a.docx");
-		    // myParser pars=new WordTableDOCX();
-		    // myParser pars=new WordTable2CSV();
-			//
+		    //
 		    String a1="C:\\TMP\\_REV\\monitoring_protocol_";		    
 		    //
 		    if (args.length>0) {
-		    	a1=args[0];	// директория и маска имени файла
+                      a1=args[0];	// директория и маска имени файла
 		    } else {
-                        System.out.println("(C) 2016 Алексей Еремин");
-                        System.out.println("WTAB v.2.06 02.12.2016");
-                        System.out.println("Удаляет из таблицы скриншотов строки с несуществующими файлами .jpg");
-                        System.out.println("c помощью Word промежуточно преобразует RTF в DOCX и обратно");
-                        System.out.println("c помощью pkzipc формирует архив zip");
-                        System.out.println(">java -jar wtab.jar Dir\\File");
-                        System.out.println("Dir  - директория, где находятся  файл с таблицей и файлы скриншотов");
-                        System.out.println("File - файл Word RTF с таблицей скриншотов (задается как начало имени файла)");
-                        System.out.println("По умолчанию - " + a1);
-			System.out.println("В Dir формируется архив _a.zip с файлами акта и протокола, если изменилось кол-во скриншотов.");
-			System.out.println("По окончанию работы в буфере обмена количество нарушений.");
-                        System.out.println(" ");
+                      System.out.println("(C) 2016 Алексей Еремин");
+                      System.out.println("WTAB v.2.06 02.12.2016");
+                      System.out.println("Удаляет из таблицы скриншотов строки с несуществующими файлами .jpg");
+                      System.out.println("c помощью Word промежуточно преобразует RTF в DOCX и обратно");
+                      System.out.println("c помощью pkzipc формирует архив zip");
+                      System.out.println(">java -jar wtab.jar Dir\\File");
+                      System.out.println("Dir  - директория, где находятся  файл с таблицей и файлы скриншотов");
+                      System.out.println("File - файл Word RTF с таблицей скриншотов (задается как начало имени файла)");
+                      System.out.println("По умолчанию - " + a1);
+                      System.out.println("В Dir формируется архив _a.zip с файлами акта и протокола, если изменилось кол-во скриншотов.");
+                      System.out.println("По окончанию работы в буфере обмена количество нарушений.");
+                      System.out.println(" ");
 		    }
 		    //
 		    File nf=new File(a1);
@@ -47,12 +43,11 @@ public class Wtab {
 		    //
 		}
 		catch (Exception ex) {
-                    ex.printStackTrace();
+                  ex.printStackTrace();
 		}
 		//
 		// System.out.println("END PROGRAMM"); 
 	} // end of main()
-	
-
+  
 }
 

@@ -7,10 +7,6 @@ public class Wtab {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//
-          // добавил в 17:32
-          // добавил в 17:34
-          // добавил в 17:35
-          
 		try {
 		    // str=WordParser.parsed("c:/tmp/a97.doc");
 		    // str=WordParser.parsex("c:/tmp/_rev/a.docx");

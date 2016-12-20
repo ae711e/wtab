@@ -1,13 +1,13 @@
 package wtabae;
 
 /**
- * Created by Алексей on 03.07.2016.
+ * Created by РђР»РµРєСЃРµР№ on 03.07.2016.
  * (C) 2016, Aleksey Eremin
  *
- * обработка таблицы в файле  .docx
+ * РѕР±СЂР°Р±РѕС‚РєР° С‚Р°Р±Р»РёС†С‹ РІ С„Р°Р№Р»Рµ  .docx
 */
 // Modify:
-// 2016-07-03 добавил очистку "странной ячейки" emptedStarngeCell()
+// 2016-07-03 РґРѕР±Р°РІРёР» РѕС‡РёСЃС‚РєСѓ "СЃС‚СЂР°РЅРЅРѕР№ СЏС‡РµР№РєРё" emptedStarngeCell()
 //
 
 import java.io.File;
@@ -25,27 +25,27 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
-// переделать таблицу со скриншотами в файле DOCX
+// РїРµСЂРµРґРµР»Р°С‚СЊ С‚Р°Р±Р»РёС†Сѓ СЃРѕ СЃРєСЂРёРЅС€РѕС‚Р°РјРё РІ С„Р°Р№Р»Рµ DOCX
 public class WordTableDOCX extends myParser {
     @Override
     boolean parse(String inputFileName, String outputFileName)
     {
-        final String strNEED_TEXT="Наименование файла скриншота.";   	// название требуемой колонки
+        final String strNEED_TEXT="РќР°РёРјРµРЅРѕРІР°РЅРёРµ С„Р°Р№Р»Р° СЃРєСЂРёРЅС€РѕС‚Р°.";   	// РЅР°Р·РІР°РЅРёРµ С‚СЂРµР±СѓРµРјРѕР№ РєРѕР»РѕРЅРєРё
         String str;
         int cn, cnt;
         int i, n;
         boolean result=false;
-        String DiRi;		// название каталога с картинками
+        String DiRi;		// РЅР°Р·РІР°РЅРёРµ РєР°С‚Р°Р»РѕРіР° СЃ РєР°СЂС‚РёРЅРєР°РјРё
         File file;
         FileInputStream fileInputStream=null;
         XWPFDocument docx;
         try {
             file=new File(inputFileName);
             fileInputStream = new FileInputStream(file);
-            // открываем файл и считываем его содержимое в объект XWPFDocument
+            // РѕС‚РєСЂС‹РІР°РµРј С„Р°Р№Р» Рё СЃС‡РёС‚С‹РІР°РµРј РµРіРѕ СЃРѕРґРµСЂР¶РёРјРѕРµ РІ РѕР±СЉРµРєС‚ XWPFDocument
             docx = new XWPFDocument(OPCPackage.open(fileInputStream));  // word 2007
-            // Получим имя каталога входного файла
-            DiRi=file.getParent();  // название каталога с картинками
+            // РџРѕР»СѓС‡РёРј РёРјСЏ РєР°С‚Р°Р»РѕРіР° РІС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
+            DiRi=file.getParent();  // РЅР°Р·РІР°РЅРёРµ РєР°С‚Р°Р»РѕРіР° СЃ РєР°СЂС‚РёРЅРєР°РјРё
             //
             fileInputStream.close();
         } catch(IOException | InvalidFormatException ex) {
@@ -59,36 +59,36 @@ public class WordTableDOCX extends myParser {
         XWPFTable table;
         XWPFTableRow row;
         XWPFTableCell cell;
-        XWPFTable mytable = null;  // требуемая таблица со списокм скриншотов
-        int mycol=0; // колонка с именами файлов
-        // пройдемся по таблицам документа в поисках нужной таблицы,
-        // то есть такой, у которой в последнем столбце заголовка написано needText
+        XWPFTable mytable = null;  // С‚СЂРµР±СѓРµРјР°СЏ С‚Р°Р±Р»РёС†Р° СЃРѕ СЃРїРёСЃРѕРєРј СЃРєСЂРёРЅС€РѕС‚РѕРІ
+        int mycol=0; // РєРѕР»РѕРЅРєР° СЃ РёРјРµРЅР°РјРё С„Р°Р№Р»РѕРІ
+        // РїСЂРѕР№РґРµРјСЃСЏ РїРѕ С‚Р°Р±Р»РёС†Р°Рј РґРѕРєСѓРјРµРЅС‚Р° РІ РїРѕРёСЃРєР°С… РЅСѓР¶РЅРѕР№ С‚Р°Р±Р»РёС†С‹,
+        // С‚Рѕ РµСЃС‚СЊ С‚Р°РєРѕР№, Сѓ РєРѕС‚РѕСЂРѕР№ РІ РїРѕСЃР»РµРґРЅРµРј СЃС‚РѕР»Р±С†Рµ Р·Р°РіРѕР»РѕРІРєР° РЅР°РїРёСЃР°РЅРѕ needText
         tableIter = docx.getTablesIterator();
         while(tableIter.hasNext()) {
-            table = tableIter.next();		// очередная таблица
+            table = tableIter.next();		// РѕС‡РµСЂРµРґРЅР°СЏ С‚Р°Р±Р»РёС†Р°
             //printTable(table);
-            cellList=table.getRow(0).getTableCells(); // набор ячеек первой строки
-            // ищем таблицу скриншотов
-            cn=cellList.size()-1;  // индекс последней ячейки (столбца)
-            // таблицы с 3 колонками (индекс последней колонки 2) проверим
-            // на странную ячейку и очистим ее
+            cellList=table.getRow(0).getTableCells(); // РЅР°Р±РѕСЂ СЏС‡РµРµРє РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё
+            // РёС‰РµРј С‚Р°Р±Р»РёС†Сѓ СЃРєСЂРёРЅС€РѕС‚РѕРІ
+            cn=cellList.size()-1;  // РёРЅРґРµРєСЃ РїРѕСЃР»РµРґРЅРµР№ СЏС‡РµР№РєРё (СЃС‚РѕР»Р±С†Р°)
+            // С‚Р°Р±Р»РёС†С‹ СЃ 3 РєРѕР»РѕРЅРєР°РјРё (РёРЅРґРµРєСЃ РїРѕСЃР»РµРґРЅРµР№ РєРѕР»РѕРЅРєРё 2) РїСЂРѕРІРµСЂРёРј
+            // РЅР° СЃС‚СЂР°РЅРЅСѓСЋ СЏС‡РµР№РєСѓ Рё РѕС‡РёСЃС‚РёРј РµРµ
             if(cn == 2) {
                 emptedStrangeCell(table);
             }
-            // таблицы с 5 колонками проверим на содержимое последней колонки
-            // ищем таблицу со скриншотами
+            // С‚Р°Р±Р»РёС†С‹ СЃ 5 РєРѕР»РѕРЅРєР°РјРё РїСЂРѕРІРµСЂРёРј РЅР° СЃРѕРґРµСЂР¶РёРјРѕРµ РїРѕСЃР»РµРґРЅРµР№ РєРѕР»РѕРЅРєРё
+            // РёС‰РµРј С‚Р°Р±Р»РёС†Сѓ СЃРѕ СЃРєСЂРёРЅС€РѕС‚Р°РјРё
             if (cn == 4) {
-                str=cellList.get(cn).getText();  // последняя колонка (там должны быть имена файлов)
-                if( str.regionMatches(0, strNEED_TEXT, 0, strNEED_TEXT.length()) ) { // сравним с искомым текстом заоловка столбца
-                    mytable=table;	// запомним таблицу
-                    mycol=cn;	// запомним индекс столбца
+                str=cellList.get(cn).getText();  // РїРѕСЃР»РµРґРЅСЏСЏ РєРѕР»РѕРЅРєР° (С‚Р°Рј РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РёРјРµРЅР° С„Р°Р№Р»РѕРІ)
+                if( str.regionMatches(0, strNEED_TEXT, 0, strNEED_TEXT.length()) ) { // СЃСЂР°РІРЅРёРј СЃ РёСЃРєРѕРјС‹Рј С‚РµРєСЃС‚РѕРј Р·Р°РѕР»РѕРІРєР° СЃС‚РѕР»Р±С†Р°
+                    mytable=table;	// Р·Р°РїРѕРјРЅРёРј С‚Р°Р±Р»РёС†Сѓ
+                    mycol=cn;	// Р·Р°РїРѕРјРЅРёРј РёРЅРґРµРєСЃ СЃС‚РѕР»Р±С†Р°
                     break;
                 }
             }
         } // end while
         //
-        // вышли и проверим  - нашли ли таблицу?
-        // считаем, если последняя колонка больше 0, значит нашли
+        // РІС‹С€Р»Рё Рё РїСЂРѕРІРµСЂРёРј  - РЅР°С€Р»Рё Р»Рё С‚Р°Р±Р»РёС†Сѓ?
+        // СЃС‡РёС‚Р°РµРј, РµСЃР»Рё РїРѕСЃР»РµРґРЅСЏСЏ РєРѕР»РѕРЅРєР° Р±РѕР»СЊС€Рµ 0, Р·РЅР°С‡РёС‚ РЅР°С€Р»Рё
         if (mycol<1) {
             Log("?ERROR-Not found need table");
             try {
@@ -100,26 +100,26 @@ public class WordTableDOCX extends myParser {
         }
         //
         ////printTable(mytable);
-        // пойдем по найденной таблице с конца и будем удалять строки у которых нет картинок
+        // РїРѕР№РґРµРј РїРѕ РЅР°Р№РґРµРЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ СЃ РєРѕРЅС†Р° Рё Р±СѓРґРµРј СѓРґР°Р»СЏС‚СЊ СЃС‚СЂРѕРєРё Сѓ РєРѕС‚РѕСЂС‹С… РЅРµС‚ РєР°СЂС‚РёРЅРѕРє
         cnt=0;
-        rowList = mytable.getRows();	// список строк таблицы
-        n=rowList.size();				// кол-во строк таблицы
-        // начнем проверять список файлов с конца таблицы,
-        // и если файла нет - удалять строку
+        rowList = mytable.getRows();	// СЃРїРёСЃРѕРє СЃС‚СЂРѕРє С‚Р°Р±Р»РёС†С‹
+        n=rowList.size();				// РєРѕР»-РІРѕ СЃС‚СЂРѕРє С‚Р°Р±Р»РёС†С‹
+        // РЅР°С‡РЅРµРј РїСЂРѕРІРµСЂСЏС‚СЊ СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ СЃ РєРѕРЅС†Р° С‚Р°Р±Р»РёС†С‹,
+        // Рё РµСЃР»Рё С„Р°Р№Р»Р° РЅРµС‚ - СѓРґР°Р»СЏС‚СЊ СЃС‚СЂРѕРєСѓ
         int kolnar=0;
         for(i=n-1; i>0; i--) {
-            row=rowList.get(i);					// взять строку с индексом i
-            cellList = row.getTableCells();		// из строки получить список ячеек (колонки)
-            str=cellList.get(mycol).getText();	// последняя колонка - имя файла с картинкой
-            // если окончание (расширение) имени файла .jpg
-            if(str.endsWith(".jpg")) {  // str.regionMatches(l-4, ".jpg",0,4) l=str.length(); // длина строки
-                // получили имя файла
+            row=rowList.get(i);					// РІР·СЏС‚СЊ СЃС‚СЂРѕРєСѓ СЃ РёРЅРґРµРєСЃРѕРј i
+            cellList = row.getTableCells();		// РёР· СЃС‚СЂРѕРєРё РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє СЏС‡РµРµРє (РєРѕР»РѕРЅРєРё)
+            str=cellList.get(mycol).getText();	// РїРѕСЃР»РµРґРЅСЏСЏ РєРѕР»РѕРЅРєР° - РёРјСЏ С„Р°Р№Р»Р° СЃ РєР°СЂС‚РёРЅРєРѕР№
+            // РµСЃР»Рё РѕРєРѕРЅС‡Р°РЅРёРµ (СЂР°СЃС€РёСЂРµРЅРёРµ) РёРјРµРЅРё С„Р°Р№Р»Р° .jpg
+            if(str.endsWith(".jpg")) {  // str.regionMatches(l-4, ".jpg",0,4) l=str.length(); // РґР»РёРЅР° СЃС‚СЂРѕРєРё
+                // РїРѕР»СѓС‡РёР»Рё РёРјСЏ С„Р°Р№Р»Р°
                 file=new File(DiRi,str);
-                kolnar++;   // кол-во нарушений (изначальное сейчас)
-                // проверим есть ли такой файл?
+                kolnar++;   // РєРѕР»-РІРѕ РЅР°СЂСѓС€РµРЅРёР№ (РёР·РЅР°С‡Р°Р»СЊРЅРѕРµ СЃРµР№С‡Р°СЃ)
+                // РїСЂРѕРІРµСЂРёРј РµСЃС‚СЊ Р»Рё С‚Р°РєРѕР№ С„Р°Р№Р»?
                 if(!file.exists()) {
-                    // файла нет
-                    mytable.removeRow(i);		// удалим строку i из таблицы
+                    // С„Р°Р№Р»Р° РЅРµС‚
+                    mytable.removeRow(i);		// СѓРґР°Р»РёРј СЃС‚СЂРѕРєСѓ i РёР· С‚Р°Р±Р»РёС†С‹
                     cnt++;
                     ////Log("Not exist " + cnt + ") " + str);
                 }  // if (!file.exists())
@@ -129,25 +129,25 @@ public class WordTableDOCX extends myParser {
         //
         Log("Delete rows: " + cnt);
         //        
-        // если было изменение (удаление несуществующих скриншотов)
+        // РµСЃР»Рё Р±С‹Р»Рѕ РёР·РјРµРЅРµРЅРёРµ (СѓРґР°Р»РµРЅРёРµ РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰РёС… СЃРєСЂРёРЅС€РѕС‚РѕРІ)
         if(cnt>0) {
-        	kolnar=0;  // кол-во нарушений в таблице, начнем считать заново)
-            // переномеруем строки таблицы
-            rowList = mytable.getRows();	// список строк таблицы
-            n=rowList.size();				// кол-во строк таблицы
+        	kolnar=0;  // РєРѕР»-РІРѕ РЅР°СЂСѓС€РµРЅРёР№ РІ С‚Р°Р±Р»РёС†Рµ, РЅР°С‡РЅРµРј СЃС‡РёС‚Р°С‚СЊ Р·Р°РЅРѕРІРѕ)
+            // РїРµСЂРµРЅРѕРјРµСЂСѓРµРј СЃС‚СЂРѕРєРё С‚Р°Р±Р»РёС†С‹
+            rowList = mytable.getRows();	// СЃРїРёСЃРѕРє СЃС‚СЂРѕРє С‚Р°Р±Р»РёС†С‹
+            n=rowList.size();				// РєРѕР»-РІРѕ СЃС‚СЂРѕРє С‚Р°Р±Р»РёС†С‹
             cnt=0;
-            // начнем проходить таблицу со второй строки i=1 (в первой-то заголовок) и ставить номера
+            // РЅР°С‡РЅРµРј РїСЂРѕС…РѕРґРёС‚СЊ С‚Р°Р±Р»РёС†Сѓ СЃРѕ РІС‚РѕСЂРѕР№ СЃС‚СЂРѕРєРё i=1 (РІ РїРµСЂРІРѕР№-С‚Рѕ Р·Р°РіРѕР»РѕРІРѕРє) Рё СЃС‚Р°РІРёС‚СЊ РЅРѕРјРµСЂР°
             for(i=1; i<n; i++) {
-                row=rowList.get(i);					// взять строку с индексом i
-                cellList = row.getTableCells();		// из строки получить список ячеек (колонки)
-                cell=cellList.get(0);				// взять первую ячейка (первый столбец, текущая строка)
-                removeParagraphs(cell);				// удалить имеющиеся параграфы в ячейке
+                row=rowList.get(i);					// РІР·СЏС‚СЊ СЃС‚СЂРѕРєСѓ СЃ РёРЅРґРµРєСЃРѕРј i
+                cellList = row.getTableCells();		// РёР· СЃС‚СЂРѕРєРё РїРѕР»СѓС‡РёС‚СЊ СЃРїРёСЃРѕРє СЏС‡РµРµРє (РєРѕР»РѕРЅРєРё)
+                cell=cellList.get(0);				// РІР·СЏС‚СЊ РїРµСЂРІСѓСЋ СЏС‡РµР№РєР° (РїРµСЂРІС‹Р№ СЃС‚РѕР»Р±РµС†, С‚РµРєСѓС‰Р°СЏ СЃС‚СЂРѕРєР°)
+                removeParagraphs(cell);				// СѓРґР°Р»РёС‚СЊ РёРјРµСЋС‰РёРµСЃСЏ РїР°СЂР°РіСЂР°С„С‹ РІ СЏС‡РµР№РєРµ
                 str=Integer.toString(i);
-                cell.setText(str); 					// вписать номер
-                kolnar++;   // кол-вл нарушений
+                cell.setText(str); 					// РІРїРёСЃР°С‚СЊ РЅРѕРјРµСЂ
+                kolnar++;   // РєРѕР»-РІР» РЅР°СЂСѓС€РµРЅРёР№
             } // for
             //
-            // запишем измененный документ в выходной файл
+            // Р·Р°РїРёС€РµРј РёР·РјРµРЅРµРЅРЅС‹Р№ РґРѕРєСѓРјРµРЅС‚ РІ РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
             try {
                 FileOutputStream out = new FileOutputStream(outputFileName);
                 docx.write(out);
@@ -165,7 +165,7 @@ public class WordTableDOCX extends myParser {
         Log("--------------------------");
         Log("KOL-VO NARUSHENII: " + kolnar);
         Log("--------------------------");
-        // загоним кол-во нарушений в буфер обмена
+        // Р·Р°РіРѕРЅРёРј РєРѕР»-РІРѕ РЅР°СЂСѓС€РµРЅРёР№ РІ Р±СѓС„РµСЂ РѕР±РјРµРЅР°
         TextTransfer clp = new TextTransfer();
         clp.setData(String.valueOf(kolnar));
         //
@@ -179,16 +179,16 @@ public class WordTableDOCX extends myParser {
         return result;
     } // parse()
 
-    // удалить параграфы из табличной ячейки
+    // СѓРґР°Р»РёС‚СЊ РїР°СЂР°РіСЂР°С„С‹ РёР· С‚Р°Р±Р»РёС‡РЅРѕР№ СЏС‡РµР№РєРё
     private static void removeParagraphs(XWPFTableCell tableCell)
     {
-        // удаляем с хвоста!
+        // СѓРґР°Р»СЏРµРј СЃ С…РІРѕСЃС‚Р°!
         for(int i = tableCell.getParagraphs().size()-1; i >=0; i--) {
             tableCell.removeParagraph(i);
         }
     }
 
-    // распечатать таблицу
+    // СЂР°СЃРїРµС‡Р°С‚Р°С‚СЊ С‚Р°Р±Р»РёС†Сѓ
     private static void printTable(XWPFTable table)
     {
         List<XWPFTableRow> rowList;
@@ -213,10 +213,10 @@ public class WordTableDOCX extends myParser {
         System.out.println("[End table]");
     }
 
-    // очистить странную ячейку таблицу
+    // РѕС‡РёСЃС‚РёС‚СЊ СЃС‚СЂР°РЅРЅСѓСЋ СЏС‡РµР№РєСѓ С‚Р°Р±Р»РёС†Сѓ
     private static void emptedStrangeCell(XWPFTable table)
     {
-        final String str_STRANGE_TEXT="tbllkhdrcols";    // странный текст
+        final String str_STRANGE_TEXT="tbllkhdrcols";    // СЃС‚СЂР°РЅРЅС‹Р№ С‚РµРєСЃС‚
         String str;
         List<XWPFTableRow> rowList;
         Iterator<XWPFTableRow> rowIter;
@@ -235,8 +235,8 @@ public class WordTableDOCX extends myParser {
                 cell = cellIter.next();
                 str=cell.getText();
                 if (str.compareTo(str_STRANGE_TEXT)==0) {  // str.regionMatches(0, str_STRANGE_TEXT,0,str_STRANGE_TEXT.length())
-                    removeParagraphs(cell);                // удалить имеющиеся параграфы в ячейке
-                    cell.setText(" "); 					// вписать пробел
+                    removeParagraphs(cell);                // СѓРґР°Р»РёС‚СЊ РёРјРµСЋС‰РёРµСЃСЏ РїР°СЂР°РіСЂР°С„С‹ РІ СЏС‡РµР№РєРµ
+                    cell.setText(" "); 					// РІРїРёСЃР°С‚СЊ РїСЂРѕР±РµР»
                     ////System.out.println("Strange text empted");
                 }
             } // end while cell

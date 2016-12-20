@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 /*
- *  Обработка rtf в docx и обратно с помощью VBS Word
+ *  РћР±СЂР°Р±РѕС‚РєР° rtf РІ docx Рё РѕР±СЂР°С‚РЅРѕ СЃ РїРѕРјРѕС‰СЊСЋ VBS Word
  */
 
 public class RunWord {
-	// текст VBS программы для запуска Word и преобразования файла RTF - DOCX
+	// С‚РµРєСЃС‚ VBS РїСЂРѕРіСЂР°РјРјС‹ РґР»СЏ Р·Р°РїСѓСЃРєР° Word Рё РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ С„Р°Р№Р»Р° RTF - DOCX
 	final static String bat_vbs="' (C) 2016 Aleksey Eremin (vbs) \r\n"
 			+ "Dim WA, WD, Args \r\n"
 			+ "Set Args = WScript.Arguments \r\n"
@@ -24,31 +24,31 @@ public class RunWord {
 			+ "Set WA = Nothing \r\n";
 		
 
-	// преобразовать RTF файл в DOCX файл
-	// путем запуска командного файла с VBS скриптом
+	// РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ RTF С„Р°Р№Р» РІ DOCX С„Р°Р№Р»
+	// РїСѓС‚РµРј Р·Р°РїСѓСЃРєР° РєРѕРјР°РЅРґРЅРѕРіРѕ С„Р°Р№Р»Р° СЃ VBS СЃРєСЂРёРїС‚РѕРј
 	public static boolean rtf2docx(String fileRtf, String fileDocx) 
 	{
 		double d=Math.random()*1000;
-		int irnd=(int)d+1;	// случайное число 1-1000
+		int irnd=(int)d+1;	// СЃР»СѓС‡Р°Р№РЅРѕРµ С‡РёСЃР»Рѕ 1-1000
 		return vbsFileExec(16, "ard" + irnd + ".vbs", fileRtf, fileDocx); // rtf2docx.vbs				
 	} // end rtf2docx()
 	
-	// преобразовать DOCX файл в RTF файл
-	// путем запуска командного файла с VBS скриптом
+	// РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚СЊ DOCX С„Р°Р№Р» РІ RTF С„Р°Р№Р»
+	// РїСѓС‚РµРј Р·Р°РїСѓСЃРєР° РєРѕРјР°РЅРґРЅРѕРіРѕ С„Р°Р№Р»Р° СЃ VBS СЃРєСЂРёРїС‚РѕРј
 	public static boolean docx2rtf(String fileDocx, String fileRtf) 
 	{
 		double d=Math.random()*1000;
-		int irnd=(int)d+1;	// случайное число 1-1000
+		int irnd=(int)d+1;	// СЃР»СѓС‡Р°Р№РЅРѕРµ С‡РёСЃР»Рѕ 1-1000
 		return vbsFileExec(6, "adr" + irnd + ".vbs", fileDocx, fileRtf); // docx2rtf.vbs
 	} // end docx2rtf()
 		
-    // Запуск на выполнения Word путем запуска командного файла с VBS скриптом
-	// сформировать командный файл VBS, выполнить его с входным и выходным файлом
-	// при успехе возвращает 1
+    // Р—Р°РїСѓСЃРє РЅР° РІС‹РїРѕР»РЅРµРЅРёСЏ Word РїСѓС‚РµРј Р·Р°РїСѓСЃРєР° РєРѕРјР°РЅРґРЅРѕРіРѕ С„Р°Р№Р»Р° СЃ VBS СЃРєСЂРёРїС‚РѕРј
+	// СЃС„РѕСЂРјРёСЂРѕРІР°С‚СЊ РєРѕРјР°РЅРґРЅС‹Р№ С„Р°Р№Р» VBS, РІС‹РїРѕР»РЅРёС‚СЊ РµРіРѕ СЃ РІС…РѕРґРЅС‹Рј Рё РІС‹С…РѕРґРЅС‹Рј С„Р°Р№Р»РѕРј
+	// РїСЂРё СѓСЃРїРµС…Рµ РІРѕР·РІСЂР°С‰Р°РµС‚ 1
 	private static boolean vbsFileExec(int cod, String fileNameVbs, String file1, String file2) 
 	{
 		String str, fileVBS, fileCMD;
-		 // сформируем командный файл VBS
+		 // СЃС„РѕСЂРјРёСЂСѓРµРј РєРѕРјР°РЅРґРЅС‹Р№ С„Р°Р№Р» VBS
 		 File fvbs=new File(tmpDir(), fileNameVbs);		 
 		 fileVBS=fvbs.getPath();
 		 str=String.format(bat_vbs, cod);
@@ -61,15 +61,15 @@ public class RunWord {
 			 System.out.println("?-ERROR-can't create vbs file-"+fileVBS);
 			 return false;
 		 }
-		 // строка задания
+		 // СЃС‚СЂРѕРєР° Р·Р°РґР°РЅРёСЏ
 		 str="\"" + fileVBS + "\" \"" + file1 + "\" \"" + file2 + "\"";
-		 // перед выполнение удалим file2
+		 // РїРµСЂРµРґ РІС‹РїРѕР»РЅРµРЅРёРµ СѓРґР°Р»РёРј file2
 		 File fs=new File(file2);
-		 fs.delete();		// удалим выходной файл
+		 fs.delete();		// СѓРґР°Р»РёРј РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р»
 		 //
 		 double d=Math.random()*1000;
-		 int irnd=(int)d+1;	// случайное число 1-1000
-		 // создадим командный файл
+		 int irnd=(int)d+1;	// СЃР»СѓС‡Р°Р№РЅРѕРµ С‡РёСЃР»Рѕ 1-1000
+		 // СЃРѕР·РґР°РґРёРј РєРѕРјР°РЅРґРЅС‹Р№ С„Р°Р№Р»
 		 File fcmd=new File(tmpDir(), "cae" + irnd + ".bat");
 		 fileCMD=fcmd.getPath();
 		 try {
@@ -83,16 +83,16 @@ public class RunWord {
 		 }
 		 //		 
 		 str=execOS("CMD /C " + fileCMD);
-		 // отладочный вывод
+		 // РѕС‚Р»Р°РґРѕС‡РЅС‹Р№ РІС‹РІРѕРґ
 		 /////System.out.println(str);
 		 //
-		 fvbs.deleteOnExit(); // удалить по завершению программы файл VBS
-		 fcmd.deleteOnExit(); // удалить командный файл по завершению программы CMD
-		 // если выходной файл появился - значит OK
+		 fvbs.deleteOnExit(); // СѓРґР°Р»РёС‚СЊ РїРѕ Р·Р°РІРµСЂС€РµРЅРёСЋ РїСЂРѕРіСЂР°РјРјС‹ С„Р°Р№Р» VBS
+		 fcmd.deleteOnExit(); // СѓРґР°Р»РёС‚СЊ РєРѕРјР°РЅРґРЅС‹Р№ С„Р°Р№Р» РїРѕ Р·Р°РІРµСЂС€РµРЅРёСЋ РїСЂРѕРіСЂР°РјРјС‹ CMD
+		 // РµСЃР»Рё РІС‹С…РѕРґРЅРѕР№ С„Р°Р№Р» РїРѕСЏРІРёР»СЃСЏ - Р·РЅР°С‡РёС‚ OK
 		 return fs.exists();		 
 	} // end vbsFileExec()
 
-	// выполнить команду ОС
+	// РІС‹РїРѕР»РЅРёС‚СЊ РєРѕРјР°РЅРґСѓ РћРЎ
 	public static String execOS(String command)
 	{
 		String result="";
@@ -116,7 +116,7 @@ public class RunWord {
 		return result;
 	}
 	
-	// выдать временный каталог (завершается обратным слэшем)
+	// РІС‹РґР°С‚СЊ РІСЂРµРјРµРЅРЅС‹Р№ РєР°С‚Р°Р»РѕРі (Р·Р°РІРµСЂС€Р°РµС‚СЃСЏ РѕР±СЂР°С‚РЅС‹Рј СЃР»СЌС€РµРј)
 	public static String tmpDir() 
 	{
 		return System.getProperty("java.io.tmpdir");
@@ -126,7 +126,7 @@ public class RunWord {
 
 
 /*
-Текст программ 
+РўРµРєСЃС‚ РїСЂРѕРіСЂР°РјРј 
 'rtf2docx.vbs
 Dim WA, WD, Args
 Set Args = WScript.Arguments

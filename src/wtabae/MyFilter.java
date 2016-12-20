@@ -5,7 +5,7 @@ import java.io.FilenameFilter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// класс для фильтрации списка файлов, выдаваемых File.list
+// РєР»Р°СЃСЃ РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё СЃРїРёСЃРєР° С„Р°Р№Р»РѕРІ, РІС‹РґР°РІР°РµРјС‹С… File.list
 public class MyFilter implements FilenameFilter {
   //String strMask;
   Pattern pat;

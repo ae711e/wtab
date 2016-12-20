@@ -1,9 +1,9 @@
 package wtabae;
 
 /*
- Работа с буфером обмена
+ Р Р°Р±РѕС‚Р° СЃ Р±СѓС„РµСЂРѕРј РѕР±РјРµРЅР°
  (C) 2016, Aleksey Eremin
- по мотивам http://blog.dimka3210.ru/2013/04/java-java-clipboard-example_12.html
+ РїРѕ РјРѕС‚РёРІР°Рј http://blog.dimka3210.ru/2013/04/java-java-clipboard-example_12.html
  */
 
 import javax.tools.Tool;

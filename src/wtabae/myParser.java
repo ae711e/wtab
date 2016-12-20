@@ -1,8 +1,8 @@
 package wtabae;
 
-// разбирает файл с таблицей (базовый класс)
+// СЂР°Р·Р±РёСЂР°РµС‚ С„Р°Р№Р» СЃ С‚Р°Р±Р»РёС†РµР№ (Р±Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ)
 public class myParser {
-  // разобрать и записать в файл outputFile
+  // СЂР°Р·РѕР±СЂР°С‚СЊ Рё Р·Р°РїРёСЃР°С‚СЊ РІ С„Р°Р№Р» outputFile
   boolean parse(String inputFileName, String outputFileName)  
   {
 	  return false;

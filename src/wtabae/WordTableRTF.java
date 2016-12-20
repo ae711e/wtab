@@ -7,24 +7,24 @@ import java.nio.file.Files;
 /**
  * Created by ae on 06.07.2016.
  *
- * Обработать таблицы в документе RTF
- * Для этого RTF переведем в DOCX
- * Обработаем DOCX
- * А затем переведем DOCX ообратно в RTF
+ * РћР±СЂР°Р±РѕС‚Р°С‚СЊ С‚Р°Р±Р»РёС†С‹ РІ РґРѕРєСѓРјРµРЅС‚Рµ RTF
+ * Р”Р»СЏ СЌС‚РѕРіРѕ RTF РїРµСЂРµРІРµРґРµРј РІ DOCX
+ * РћР±СЂР°Р±РѕС‚Р°РµРј DOCX
+ * Рђ Р·Р°С‚РµРј РїРµСЂРµРІРµРґРµРј DOCX РѕРѕР±СЂР°С‚РЅРѕ РІ RTF
  */
 public class WordTableRTF extends WordTableDOCX {
 
     @Override
     boolean parse(String inputFileName, String outputFileName) {
         // return super.parse(inputFileName, outputFileName);
-    	// сначала сделаем копию входного файла
+    	// СЃРЅР°С‡Р°Р»Р° СЃРґРµР»Р°РµРј РєРѕРїРёСЋ РІС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
     	boolean result=false;
-    	String pfile;	// имя промежуточного файла
+    	String pfile;	// РёРјСЏ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅРѕРіРѕ С„Р°Р№Р»Р°
     	//
     	pfile=inputFileName + ".docx";
-    	// преобразуем входной файл rtf в docx
+    	// РїСЂРµРѕР±СЂР°Р·СѓРµРј РІС…РѕРґРЅРѕР№ С„Р°Р№Р» rtf РІ docx
     	if (RunWord.rtf2docx(inputFileName, pfile)) {
-    		// переименуем входной файл в .bak
+    		// РїРµСЂРµРёРјРµРЅСѓРµРј РІС…РѕРґРЅРѕР№ С„Р°Р№Р» РІ .bak
     		File finp=new File(inputFileName);
     		File fbak=new File(inputFileName+".bak");
     		if(!finp.renameTo(fbak)) {
@@ -51,7 +51,7 @@ public class WordTableRTF extends WordTableDOCX {
     } // end parse()
     
     
-    // простой и удобный метод копирования файла в Java 7
+    // РїСЂРѕСЃС‚РѕР№ Рё СѓРґРѕР±РЅС‹Р№ РјРµС‚РѕРґ РєРѕРїРёСЂРѕРІР°РЅРёСЏ С„Р°Р№Р»Р° РІ Java 7
     public static boolean copyFile2File(File source, File dest) 
     {
     	try {
@@ -63,7 +63,7 @@ public class WordTableRTF extends WordTableDOCX {
         return false;
     } // end copyFile2File()
     
-    // простой и удобный метод копирования файла в Java 7
+    // РїСЂРѕСЃС‚РѕР№ Рё СѓРґРѕР±РЅС‹Р№ РјРµС‚РѕРґ РєРѕРїРёСЂРѕРІР°РЅРёСЏ С„Р°Р№Р»Р° РІ Java 7
     public static void ex_copyFile2File(File source, File dest) throws IOException 
     {
     	Files.copy(source.toPath(), dest.toPath());        	

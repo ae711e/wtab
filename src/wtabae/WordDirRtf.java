@@ -2,7 +2,7 @@ package wtabae;
 /*
  * (c) 2016, Aleksey Eremin
  * 
- * Преобразование rtf файлов с протоколами в заданной директории
+ * РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ rtf С„Р°Р№Р»РѕРІ СЃ РїСЂРѕС‚РѕРєРѕР»Р°РјРё РІ Р·Р°РґР°РЅРЅРѕР№ РґРёСЂРµРєС‚РѕСЂРёРё
  */
 
 import java.io.File;
@@ -15,24 +15,24 @@ public class WordDirRtf extends myParser {
 		String stri;
 		boolean result=false;
 		String DirFi;
-		maskFileName=maskFileName+".*rtf$"; // ищем только RTF файлы
-		// проверим директорию - есть она и является ли директорией?
+		maskFileName=maskFileName+".*rtf$"; // РёС‰РµРј С‚РѕР»СЊРєРѕ RTF С„Р°Р№Р»С‹
+		// РїСЂРѕРІРµСЂРёРј РґРёСЂРµРєС‚РѕСЂРёСЋ - РµСЃС‚СЊ РѕРЅР° Рё СЏРІР»СЏРµС‚СЃСЏ Р»Рё РґРёСЂРµРєС‚РѕСЂРёРµР№?
 		File mdir=new File(directoryFileName);
 		if(!mdir.exists() || !mdir.isDirectory()) {
 			Log("?-ERROR-Not found directory:" + directoryFileName);
 			return false;
 		}
-		// получим путь директории,где файлы лежат
-		DirFi=mdir.getAbsolutePath() + System.getProperty("file.separator");  // добавим разделитель
-		// получим список docx файлов, где надо поправить таблицу
-		// на самом деле такой файл 1, но так как имя задается как Regexp выражение,
-		// их может быть много, и мы всех их обработаем
+		// РїРѕР»СѓС‡РёРј РїСѓС‚СЊ РґРёСЂРµРєС‚РѕСЂРёРё,РіРґРµ С„Р°Р№Р»С‹ Р»РµР¶Р°С‚
+		DirFi=mdir.getAbsolutePath() + System.getProperty("file.separator");  // РґРѕР±Р°РІРёРј СЂР°Р·РґРµР»РёС‚РµР»СЊ
+		// РїРѕР»СѓС‡РёРј СЃРїРёСЃРѕРє docx С„Р°Р№Р»РѕРІ, РіРґРµ РЅР°РґРѕ РїРѕРїСЂР°РІРёС‚СЊ С‚Р°Р±Р»РёС†Сѓ
+		// РЅР° СЃР°РјРѕРј РґРµР»Рµ С‚Р°РєРѕР№ С„Р°Р№Р» 1, РЅРѕ С‚Р°Рє РєР°Рє РёРјСЏ Р·Р°РґР°РµС‚СЃСЏ РєР°Рє Regexp РІС‹СЂР°Р¶РµРЅРёРµ,
+		// РёС… РјРѕР¶РµС‚ Р±С‹С‚СЊ РјРЅРѕРіРѕ, Рё РјС‹ РІСЃРµС… РёС… РѕР±СЂР°Р±РѕС‚Р°РµРј
 		String[] list=mdir.list(new MyFilter(maskFileName));
 		n=list.length;
 		for(i=0; i<n; i++) {
-			stri=DirFi + list[i]; // имя RTF файла в каталоге
+			stri=DirFi + list[i]; // РёРјСЏ RTF С„Р°Р№Р»Р° РІ РєР°С‚Р°Р»РѕРіРµ
 			System.out.println(stri);
-			// заведем родственный объект по обработке таблицы
+			// Р·Р°РІРµРґРµРј СЂРѕРґСЃС‚РІРµРЅРЅС‹Р№ РѕР±СЉРµРєС‚ РїРѕ РѕР±СЂР°Р±РѕС‚РєРµ С‚Р°Р±Р»РёС†С‹
 			WordTableRTF wt=new WordTableRTF();
 			if(wt.parse(stri, stri)) {
 				result=true;

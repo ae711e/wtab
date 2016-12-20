@@ -8,21 +8,21 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /*
- *  (C), 2016 Алексей Еремин
+ *  (C), 2016 РђР»РµРєСЃРµР№ Р•СЂРµРјРёРЅ
  *  
- *  формирование ZIP архива
+ *  С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ ZIP Р°СЂС…РёРІР°
  */
 
 public class ZipDirFiles {
     String dirFiles;
 
-    // указать рабочик каталог
+    // СѓРєР°Р·Р°С‚СЊ СЂР°Р±РѕС‡РёРє РєР°С‚Р°Р»РѕРі
     ZipDirFiles(String inputDir)
     {
             dirFiles=inputDir;
     }
 
-    // сформировать архив файлов с расширением ext в известном каталоге в архив
+    // СЃС„РѕСЂРјРёСЂРѕРІР°С‚СЊ Р°СЂС…РёРІ С„Р°Р№Р»РѕРІ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј ext РІ РёР·РІРµСЃС‚РЅРѕРј РєР°С‚Р°Р»РѕРіРµ РІ Р°СЂС…РёРІ
     public int makeExt2Zip(String ext, String zipFile)
     {
         String DirFi, stri, zipname;
@@ -33,12 +33,12 @@ public class ZipDirFiles {
             System.out.println("?-ERROR-Not found directory:" + dirFiles);
             return 0;
         }
-        // получим путь директории,где файлы лежат
-        DirFi=mdir.getAbsolutePath() + System.getProperty("file.separator");  // добавим разделитель
-        // получим список файлов, кого надо упаковать
+        // РїРѕР»СѓС‡РёРј РїСѓС‚СЊ РґРёСЂРµРєС‚РѕСЂРёРё,РіРґРµ С„Р°Р№Р»С‹ Р»РµР¶Р°С‚
+        DirFi=mdir.getAbsolutePath() + System.getProperty("file.separator");  // РґРѕР±Р°РІРёРј СЂР°Р·РґРµР»РёС‚РµР»СЊ
+        // РїРѕР»СѓС‡РёРј СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ, РєРѕРіРѕ РЅР°РґРѕ СѓРїР°РєРѕРІР°С‚СЊ
         String[] list=mdir.list(new MyFilter(".*"+ext+"$"));
         n=list.length;
-        // архиватор
+        // Р°СЂС…РёРІР°С‚РѕСЂ
         zipname=DirFi+zipFile+".zip";
         ZipOutputStream zos=null;
         FileOutputStream out=null;
@@ -53,23 +53,23 @@ public class ZipDirFiles {
         //
         System.out.println("Dir list file to ZIP:");
         for(i=0; i<n; i++) {
-            stri = list[i]; // имя RTF файла в каталоге
-            // архивируем
-            ZipEntry ze=new ZipEntry(stri); // создаем запись для архива (указываем её название)
+            stri = list[i]; // РёРјСЏ RTF С„Р°Р№Р»Р° РІ РєР°С‚Р°Р»РѕРіРµ
+            // Р°СЂС…РёРІРёСЂСѓРµРј
+            ZipEntry ze=new ZipEntry(stri); // СЃРѕР·РґР°РµРј Р·Р°РїРёСЃСЊ РґР»СЏ Р°СЂС…РёРІР° (СѓРєР°Р·С‹РІР°РµРј РµС‘ РЅР°Р·РІР°РЅРёРµ)
             try {
-                zos.putNextEntry(ze);       // вкладываем запись в архив
-                // считываем файл в текущую запись архива
+                zos.putNextEntry(ze);       // РІРєР»Р°РґС‹РІР°РµРј Р·Р°РїРёСЃСЊ РІ Р°СЂС…РёРІ
+                // СЃС‡РёС‚С‹РІР°РµРј С„Р°Р№Р» РІ С‚РµРєСѓС‰СѓСЋ Р·Р°РїРёСЃСЊ Р°СЂС…РёРІР°
                 byte[] readBuffer=new byte[2048];
                 int bytesRead=0;
-                // открываем входной файл
+                // РѕС‚РєСЂС‹РІР°РµРј РІС…РѕРґРЅРѕР№ С„Р°Р№Р»
                 FileInputStream fis= new FileInputStream(DirFi+stri);
                 cnt=0;
                 while((bytesRead=fis.read(readBuffer)) != -1) {
                     cnt += bytesRead;
                     zos.write(readBuffer, 0, bytesRead);
                 } // end while
-                fis.close();    // закрываем входной файл
-                zos.closeEntry(); // закрываем запись в архиве
+                fis.close();    // Р·Р°РєСЂС‹РІР°РµРј РІС…РѕРґРЅРѕР№ С„Р°Р№Р»
+                zos.closeEntry(); // Р·Р°РєСЂС‹РІР°РµРј Р·Р°РїРёСЃСЊ РІ Р°СЂС…РёРІРµ
                 result++;
                 System.out.println(result + ") " + stri);
             } catch (IOException ex) {
@@ -78,7 +78,7 @@ public class ZipDirFiles {
             }
             //
         } // end for
-        // закрываем все нафиг
+        // Р·Р°РєСЂС‹РІР°РµРј РІСЃРµ РЅР°С„РёРі
         try {
             zos.close();
             out.close();
@@ -91,8 +91,8 @@ public class ZipDirFiles {
     }
     
     // pkzipc -add " & DirFi & "_a.zip " & DirFi & "monitoring_*.rtf"
-    // сформировать архив файлов с расширением ext в известном каталоге в архив 
-    // с помощью утилиты pkzipc (должна быть в C:\Windows)
+    // СЃС„РѕСЂРјРёСЂРѕРІР°С‚СЊ Р°СЂС…РёРІ С„Р°Р№Р»РѕРІ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј ext РІ РёР·РІРµСЃС‚РЅРѕРј РєР°С‚Р°Р»РѕРіРµ РІ Р°СЂС…РёРІ 
+    // СЃ РїРѕРјРѕС‰СЊСЋ СѓС‚РёР»РёС‚С‹ pkzipc (РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РІ C:\Windows)
     public int makeZipPkzip(String ext, String zipFile)
     {
     	String DirFi, stri, zipname;
@@ -102,15 +102,15 @@ public class ZipDirFiles {
             System.out.println("?-ERROR-Not found directory:" + dirFiles);
             return 0;
         }
-        // получим путь директории,где файлы лежат
-        DirFi=mdir.getAbsolutePath() + System.getProperty("file.separator");  // добавим разделитель
+        // РїРѕР»СѓС‡РёРј РїСѓС‚СЊ РґРёСЂРµРєС‚РѕСЂРёРё,РіРґРµ С„Р°Р№Р»С‹ Р»РµР¶Р°С‚
+        DirFi=mdir.getAbsolutePath() + System.getProperty("file.separator");  // РґРѕР±Р°РІРёРј СЂР°Р·РґРµР»РёС‚РµР»СЊ
         ext="*." + ext;	// *.rtf
-        // полное имя архива
+        // РїРѕР»РЅРѕРµ РёРјСЏ Р°СЂС…РёРІР°
         zipname=DirFi+zipFile+".zip";
         //
         strcmd="pkzipc -add -silent " + zipname + " " + DirFi + ext;
         str=RunWord.execOS(strcmd);
-        // отладочный вывод
+        // РѕС‚Р»Р°РґРѕС‡РЅС‹Р№ РІС‹РІРѕРґ
         System.out.println(strcmd);
         System.out.println(str);
         //

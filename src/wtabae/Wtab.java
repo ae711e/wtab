@@ -33,21 +33,16 @@ public class Wtab {
 		    }
 		    //
 		    File nf=new File(a1);
-			a1=nf.getParent();
-			String a2=nf.getName();
+		    a1=nf.getParent();
+                    String a2=nf.getName();
 		    // начнем обработку
 		    myParser pars=new WordDirRtf();//РАБОЧАЯ ВЕРСИЯ
-		    
-			//myParser pars=new WordTableDOCX();// Отладка
-			//a1="c:\\tmp\\_rev\\aa.docx";// Отладка
-			//a2="c:\\tmp\\_rev\\bbb.docx";// Отладка
-			
 		    //
 		    if(pars.parse(a1, a2)) {
-                        // запаковать
-                        ZipDirFiles zd=new ZipDirFiles(a1);
-                        //zd.makeExt2Zip("rtf", "_aaa"); // АС Ревизор не берет такие архивы
-                        zd.makeZipPkzip("rtf", "_a"); // использует утилиту pkzipc
+                      // запаковать
+                      ZipDirFiles zd=new ZipDirFiles(a1);
+                      //zd.makeExt2Zip("rtf", "_aaa"); // АС Ревизор не берет такие архивы
+                      zd.makeZipPkzip("rtf", "_a"); // использует утилиту pkzipc
 		    }
 		    //
 		}

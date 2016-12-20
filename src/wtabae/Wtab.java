@@ -8,7 +8,7 @@ public class Wtab {
 		// TODO Auto-generated method stub
 		//
 		try {
-		    //
+		    // изменения внес дома
 		    String a1="C:\\TMP\\_REV\\monitoring_protocol_";		    
 		    //
 		    if (args.length>0) {

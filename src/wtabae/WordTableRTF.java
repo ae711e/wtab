@@ -1,17 +1,20 @@
+/*
+ * Copyright (c) 2016. Aleksey Eremin
+ *
+ * Created by ae on 06.07.2016.
+ *
+ * Обработать таблицы в документе RTF
+ * Для этого RTF переведем в DOCX
+ * Обработаем DOCX
+ *
+ */
+
 package wtabae;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-/**
- * Created by ae on 06.07.2016.
- *
- * Обработать таблицы в документе RTF
- * Для этого RTF переведем в DOCX
- * Обработаем DOCX
- * А затем переведем DOCX ообратно в RTF
- */
 public class WordTableRTF extends WordTableDOCX {
 
     @Override
